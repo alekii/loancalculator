@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Loan Calculator</title>
+</head>
+<body>
+    <section id="main">
+    <div id="formarea"> 
+        <h1>JSL Loan Calculator</h1>
+        <form id ="form">
+            <label for="loan" class="labels ">Loan Amount</label>
+            <input type="text" id ="amount" class="input">
+            <label for="loan" id="label" class="labels ">No of Months</label>
+            <input type="text" id="months" class="input "> 
+            <input type="submit" id="calculateBtn" value ="Calculate"> 
+        </form> 
+        <div id="results">
+            <span class="addon">Total Loan</span>
+            <input type="text" id ="totalInstallment" class="results" disabled v>  
+            <span class="addon">Monthly Installment</span>
+            <input type="text" id="monthlyinstallment" class="results" disabled>   
+            <span class="addon">Weekly Installment</span>
+            <input type="text" id="weeklyinstallment" class="results" disabled>
+        </div>
+    </div>
+    </section> 
+<script src ="app.js"></script>
+</body>
+</html>
