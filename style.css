@@ -95,6 +95,7 @@ input[type="submit"] {
     .results{
         width:50%;
         background-color:rgb(174,174,174);
+        border:none
     }
     .addon{
         width:50%;
@@ -106,6 +107,8 @@ input[type="submit"] {
 .input{
     height:40px;
     background-color:white;
+    border:none;
+    outline:none;
 }
 
 }
