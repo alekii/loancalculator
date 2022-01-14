@@ -46,12 +46,12 @@ function showInputError(error, element) {
   errorText.style.color = "rgb(30,255,0)";
   errorText.style.marginTop = "17px";
   errorText.style.marginBottom = "17px";
-  errorText.style.fontSize="14px";
+  errorText.style.fontSize = "14px";
   form.insertBefore(errorText, element);
   disableCalc();
-   setTimeout(() => {
-     form.removeChild(errorText);
-   }, 2000);
+  setTimeout(() => {
+    form.removeChild(errorText);
+  }, 2000);
 }
 
 //listen to the submit event when user clicks on calculate button
@@ -84,16 +84,19 @@ function calculateLoan() {
 
   //convert user input to numeric
   const loanAmount = parseFloat(amount);
-  const period = parseFloat(months);
-
-  if (loanAmount < 20000 && period > 9) {
+  const period = parseFloat(months); 
+  if (loanAmount < 1000 && period > 1) {
+    showError("Loan below 1,000 should be repaid in 1 Month");
+  }
+   else if (loanAmount >= 1000 && loanAmount < 2000 && period > 3) {
+    showError("Loan below 2,000 should be repaid in 3 Months");
+  }
+   else if (loanAmount <= 2000 && loanAmount < 20000 && period > 9) {
     showError("Loan below 20,000 should be repaid in 9 Months");
-  } else if (loanAmount < 2000 && period > 1) {
-    showError("Loan below 2,000 should be repaid in 1 Month");
   } else if (period > 18) {
     showError("All loans should be repaid in 18 Months");
   } else if (loanAmount < 100000 && period > 12) {
-    showError("Loans below 100000 should be paid in 12 months");
+    showError("Loans below 10,0000 should be paid in 12 months");
   } else if (loanAmount > 150000) {
     showError("Sorry, we do not offer loans above 150,000");
   }
@@ -101,11 +104,14 @@ function calculateLoan() {
   //nested if statement
   //if above error is not present then proceed.
   if (!checkErrors) {
-    if (period === 1) {
+    if (period === 1 || loanAmount <1000) {
       //there is no interest charged on loans that are to be repaid in one month
       totalLoan = loanAmount;
-    } else if (loanAmount < 2000) {
-      totalLoan = loanAmount;
+    } else if (loanAmount >=1000 && loanAmount < 2000) {
+      INSURANCE = 50;
+      loanInterest = loanAmount * period * INTEREST;
+      totalInsurance = loanAmount + INSURANCE;
+      totalLoan = loanInterest + totalInsurance;
     } else if (loanAmount >= 2000 && loanAmount < 20000) {
       INSURANCE = 0.03;
       totalLoan = getLoanTotal(loanAmount, INSURANCE, period);
@@ -160,23 +166,24 @@ function showError(error) {
   checkErrors = true;
   disableCalc();
   calcListener();
-  //create div element
+  //create div element 
   const errorDiv = document.createElement("div");
   errorDiv.style.backgroundColor = "gray";
   errorDiv.style.color = "#fff";
   errorDiv.className = "error alert";
-  errorDiv.style.marginBottom = "10px"; 
-  errorDiv.style.minHeight = "30px";  
+  errorDiv.style.marginBottom = "10px";
+  errorDiv.style.minHeight = "30px";
   //create paragraph
   const p = document.createElement("p");
   p.style.textAlign = "center";
   p.innerText = error;
-  p.style.paddingTop="6px";
+  p.style.paddingTop = "6px";
   //add the paragraph to the div element above
   errorDiv.appendChild(p);
   formArea.insertBefore(errorDiv, form);
-   setTimeout(() => {
-     //Remove the above added div element from the DOM
-     document.querySelector(".alert").remove();
-   }, 10000);
+  setTimeout(() => {
+    //Remove the above added div element from the DOM
+    document.querySelector(".alert").remove();
+  }, 10000);
 }
+ 
