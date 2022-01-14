@@ -95,7 +95,8 @@ input[type="submit"] {
     .results{
         width:50%;
         background-color:rgb(174,174,174);
-        border:none
+        border:none;
+        margin:2px 0;
     }
     .addon{
         width:50%;
@@ -109,6 +110,9 @@ input[type="submit"] {
     background-color:white;
     border:none;
     outline:none;
+}
+.addon{
+    padding:16px 0;
 }
 
 }
